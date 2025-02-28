@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slideshow Entry with Background Music and Wallpaper</title>
+  <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background: url('stars-sky.gif') no-repeat center center fixed;
+          background-size: cover;
+      }
+
+      .spotlight {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          width: 80%;
+          max-width: 1200px;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+          background: radial-gradient(circle at center, rgba(0, 0, 0, 0.5), transparent);
+          text-align: center;
+      }
+
+      .spotlight h1 {
+          font-size: 2em;
+          margin-bottom: 20px;
+          color: white;
+      }
+
+      .spotlight button {
+          background: #4CAF50;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 5px;
+      }
+
+      .spotlight button:hover {
+          background: #45a049;
+      }
+
+      .slideshow-container {
+          display: none;
+          position: relative;
+          width: 80%;
+          max-width: 1200px;
+          margin: auto;
+          overflow: hidden;
+          border-radius: 10px;
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      }
+
+      .slideshow-container .page {
+          width: 100%;
+          height: 600px;
+          display: none;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .slideshow-container .page.active {
+          display: flex;
+      }
+
+      .slideshow-container .page img {
+          max-width: 100%;
+          max-height: 100%;
+      }
+
+      .navigation {
+          position: absolute;
+          bottom: 20px;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          padding: 0 20px;
+      }
+
+      button {
+          background: #4CAF50;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 5px;
+      }
+
+      button:hover {
+          background: #45a049;
+      }
+  </style>
+</head>
+<body>
+<div class="spotlight" id="welcome">
+  <h1>Welcome, please press the button to enter</h1>
+  <button id="enterBtn">Enter</button>
+</div>
+
+<div class="slideshow-container" id="slideshowContainer">
+  <div class="page active"><img src="1.png" alt="Page 1"></div>
+  <div class="page"><img src="2.png" alt="Page 2"></div>
+  <div class="page"><img src="3.png" alt="Page 3"></div>
+  <div class="page"><img src="4.png" alt="Page 4"></div>
+  <div class="page"><img src="5.png" alt="Page 5"></div>
+  <div class="page"><img src="6.png" alt="Page 6"></div>
+  <div class="page"><img src="7.png" alt="Page 7"></div>
+  <div class="page"><img src="8.png" alt="Page 8"></div>
+  <div class="page"><img src="9.png" alt="Page 9"></div>
+  <div class="page"><img src="10.png" alt="Page 10"></div>
+  <div class="page"><img src="11.png" alt="Page 11"></div>
+  <div class="page"><img src="12.png" alt="Page 12"></div>
+  <div class="page"><img src="13.png" alt="Page 13"></div>
+  <div class="page"><img src="14.png" alt="Page 14"></div>
+  <div class="navigation">
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+  </div>
+</div>
+
+<!-- Audio Background Music -->
+<audio id="backgroundAudio" loop>
+  <source src="Y2meta%20-%20MP3%20-%209d3ae63a791b383.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const welcome = document.getElementById('welcome');
+    const slideshowContainer = document.getElementById('slideshowContainer');
+    const enterBtn = document.getElementById('enterBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    let currentPage = 0;
+
+    backgroundAudio.play(); // Start playing the audio when the page loads
+
+    enterBtn.addEventListener('click', () => {
+      welcome.style.display = 'none';
+      slideshowContainer.style.display = 'block';
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        updateContent();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < 14) {
+        currentPage++;
+        updateContent();
+      }
+    });
+
+    function updateContent() {
+      const pages = slideshowContainer.getElementsByClassName('page');
+      for (let i = 0; i < pages.length; i++) {
+        pages[i].classList.remove('active');
+      }
+      pages[currentPage].classList.add('active');
+    }
+
+    updateContent();
+  });
+</script>
+</body>
+</html>
